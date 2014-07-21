@@ -1,5 +1,5 @@
 This is a collection of Simple Java programs for the purpose of basic programming introduction.
                                                                                          -mkc
 
-$ javac <filename.java>
+$ javac filename.java
 $ java filename
