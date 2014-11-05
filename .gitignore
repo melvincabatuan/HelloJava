@@ -1,0 +1,11 @@
+*.[oa]
+*.[class]
+*.[gif]
+*.[png]
+*.[prefs]
+*.[java~]
+*.[classpath]
+*˜
+.*
+/.*
+!/.gitignore

@@ -1,7 +1,7 @@
 
 public class Shirt {
 
-	enum ShirtSize{ SMALL, MEDIUM, LARGE };
+	enum ShirtSize{ SMALL, MEDUIM, LARGE };
 	ShirtSize size;
 	
 }
