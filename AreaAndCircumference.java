@@ -1,13 +1,14 @@
 /** 
 Program to determine the area and circumference of a circle
-@author mkc
+@author You
 */
 
 import javax.swing.JOptionPane;
 
 public class AreaAndCircumference{
-                 
-   public static void main(String[] arguments) {
+  
+   public static final double PI = 3.14;                   
+   public static void main(String[] args) {
    
     double radius; 
     double area; 
@@ -15,24 +16,17 @@ public class AreaAndCircumference{
     String radiusString;                                  
     String outputStr; 
 
-    /** Get the radius. */
     radiusString =JOptionPane.showInputDialog ("Enter the radius: ");
-    radius = Double.parseDouble(radiusString); 
-           
-    /** Compute area and circumference. */
-    area = Math.PI * radius * radius;
-    circumference = 2 * Math.PI * radius; 
-
-    /** Format String. */ 
-    outputStr = "Radius: " + radius + " units" + "\n" +"Area: " + String.format("%.2f", area) + 
+    radius = Double.parseDouble(radiusString);            
+    area = PI * radius * radius;
+    circumference = 2 * PI * radius;				
+    outputStr = "Radius: " + radius + " units" + "\n" +"Area: " + area + 
                 " square units\n" + "Circumference: " + 
-                String.format("%.2f", circumference)  + " units";   
-    
-    /** Display area and circumference. */		
+                circumference  + " units";       		
     JOptionPane.showMessageDialog(null, outputStr, "Circle",              
-                                JOptionPane.INFORMATION_MESSAGE); 
-    System.exit(0);   
-                                    	
-  }//ENDMAIN
-}//ENDCLASS
+                                JOptionPane.INFORMATION_MESSAGE);  
+ 
+    System.exit(0);                                       	
+  }
+}
 

@@ -1,0 +1,17 @@
+The following table lists Java reserved words in alphabetical order.
+abstract 	else 	interface switch
+assert 		enum 	long synchronized
+boolean 	extends native this
+break 		false 	new throw
+byte 		final 	null throws
+case 		finally package transient
+catch 		float 	private true
+char 		for 	protected try
+class 		goto 	public void
+const 		if 	return volatile
+continue 	implements short while
+default 	import 	static
+do 		instanceof strictfp
+double 		int 	super
+
+The reserved words const and goto are not currently in use.

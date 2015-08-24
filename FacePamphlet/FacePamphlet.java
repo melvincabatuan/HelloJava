@@ -1,0 +1,319 @@
+/* 
+ * File: FacePamphlet.java
+ * -----------------------
+ * When it is finished, this program will implement a basic social network
+ * management system.
+ */
+
+import acm.program.*;
+import acm.graphics.*;
+import acm.util.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class FacePamphlet extends Program implements FacePamphletConstants { // milesStone5
+//public class FacePamphlet extends ConsoleProgram implements FacePamphletConstants {
+
+        // Interactors
+       	private JTextField textFieldName;
+        private JTextField textFieldStatus;
+        private JTextField textFieldPicture;
+        private JTextField textFieldAddFriend;
+	private JButton buttonAdd;
+	private JButton buttonDelete;
+        private JButton buttonLookup;
+        private JButton buttonStatus;
+        private JButton buttonPicture;
+        private JButton buttonAddFriend;
+
+        // Database
+        private FacePamphletDatabase faceDatabase; //milestone3
+
+        // Current profile
+        private FacePamphletProfile currentProfile; // milesStone4
+
+        // Canvas
+        private FacePamphletCanvas fpCanvas; // milesStone5
+ 
+	/**
+	 * This method has the responsibility for initializing the 
+	 * interactors in the application, and taking care of any other 
+	 * initialization that needs to be performed.
+	 */
+	public void init() {
+		// You fill this in
+                /// 1. Initialize and add interactors with their listeners
+		JLabel name = new JLabel("Name:");
+
+		textFieldName = new JTextField(TEXT_FIELD_SIZE);
+                textFieldStatus = new JTextField(TEXT_FIELD_SIZE);
+                textFieldStatus.addActionListener(this);
+                textFieldPicture = new JTextField(TEXT_FIELD_SIZE);
+                textFieldPicture.addActionListener(this);
+                textFieldAddFriend = new JTextField(TEXT_FIELD_SIZE);
+                textFieldAddFriend.addActionListener(this);
+
+		buttonAdd = new JButton("Add");
+		buttonDelete = new JButton("Delete");
+                buttonLookup = new JButton("Lookup");	
+                buttonStatus = new JButton("Change Status");	
+                buttonPicture = new JButton("Change Picture");
+                buttonAddFriend = new JButton("Add Friend");
+		
+                /// 2. Add to the region along the NORTH and WEST edge of the window
+		add(name, NORTH);
+		add(textFieldName, NORTH);
+		add(buttonAdd, NORTH);
+		add(buttonDelete, NORTH);
+                add(buttonLookup, NORTH);
+
+                add(textFieldStatus, WEST);
+                add(buttonStatus, WEST);
+                add(new JLabel(EMPTY_LABEL_TEXT), WEST);
+                add(textFieldPicture, WEST);                 
+                add(buttonPicture, WEST);
+                add(new JLabel(EMPTY_LABEL_TEXT), WEST);
+                add(textFieldAddFriend, WEST);
+                add(buttonAddFriend, WEST);
+
+                addActionListeners();
+
+                /// 3. Initialize faceDatabase
+                faceDatabase = new FacePamphletDatabase(); //milestone3
+
+                /// 4. Current profile to be updated
+                currentProfile = null;  //milestone4
+
+                /// 5. Canvas
+                fpCanvas = new FacePamphletCanvas(); //milestone5
+                add(fpCanvas);
+    }
+    
+  
+    /**
+     * This class is responsible for detecting when the buttons are
+     * clicked or interactors are used, so you will have to add code
+     * to respond to these actions.
+     */
+    public void actionPerformed(ActionEvent e) {
+		// You fill this in as well as add any additional methods
+              Object source = e.getSource(); 
+	
+              String nameEntry = textFieldName.getText(); 
+              String statusEntry = textFieldStatus.getText(); 
+              String pictureEntry = textFieldPicture.getText();
+              String friendEntry = textFieldAddFriend.getText();                 
+          
+              /// Handles the Add button
+              if (source == buttonAdd && !nameEntry.isEmpty()){
+                 // println("Add: " + nameEntry); // milesStone1
+                 handleAddButton(nameEntry);             
+              }
+
+              /// Handles the Delete button
+              else if (source == buttonDelete && !nameEntry.isEmpty()){  
+                  //println("Delete: " + nameEntry); // milesStone1             
+                  handleDeleteButton(nameEntry);
+              } 
+
+              /// Handles the Lookup button 
+              else if (source == buttonLookup && !nameEntry.isEmpty()){
+                 //println("Lookup: " + nameEntry); // milesStone1
+                 handleLookupButton(nameEntry); 
+              }
+
+              /// Handles Change Status
+              else if ((source == buttonStatus || source == textFieldStatus) && !statusEntry.isEmpty()){
+                 //println("Change Status: " + textFieldStatus.getText()); // milesStone1
+                 handleChangeStatus(statusEntry);   
+              }
+
+              /// Handle picture change
+              else if ((source == buttonPicture || source == textFieldPicture) && !pictureEntry.isEmpty()){
+                 //println("Change Picture: " + pictureEntry); // milestone1
+                 handleChangeImage(pictureEntry);
+              }
+
+              /// Handle add friend
+              else if ((source == buttonAddFriend || source == textFieldAddFriend) && !friendEntry.isEmpty()){
+                 // println("Add Friend: " + friendEntry); // milestone1
+                handleAddFriend(friendEntry);                 
+              }
+    }
+
+
+
+    private void handleAddButton(String nameEntry){
+
+       boolean exists = faceDatabase.containsProfile(nameEntry);
+
+       if(exists){
+            // println("Add: profile for " + nameEntry + " already exists: " + faceDatabase.getProfile(nameEntry));                    
+             currentProfile = faceDatabase.getProfile(nameEntry); 
+             fpCanvas.displayProfile(currentProfile);
+             fpCanvas.showMessage("A profile with the name " + nameEntry + " already exists");                   
+       }
+
+       else
+
+       {
+             currentProfile = new FacePamphletProfile(nameEntry);
+             faceDatabase.addProfile(currentProfile);
+             // println("Add: new profile: " + faceDatabase.getProfile(nameEntry));
+             fpCanvas.displayProfile(currentProfile);
+             fpCanvas.showMessage("New profile created");                    
+       }
+       // println("--> Current profile: " + currentProfile); 
+    }
+
+
+    private void handleDeleteButton(String nameEntry){
+
+           boolean exists = faceDatabase.containsProfile(nameEntry);
+
+                  currentProfile = null;
+                  fpCanvas.displayProfile(currentProfile);
+                 // println("--> No current profile");
+                 
+                  if(exists){ 
+                      faceDatabase.deleteProfile(nameEntry);
+                      // println("Delete: Profile of " + nameEntry + " deleted");
+                      fpCanvas.showMessage("Profile of " + nameEntry + " deleted");
+                      } 
+                           
+                      else 
+
+                      {
+                      // println("Delete: profile with name " + nameEntry + " does not exist");
+                      fpCanvas.showMessage("A profile with the name " + nameEntry + " does not exist");
+                      } 
+    }
+
+
+    private void handleLookupButton(String nameEntry){
+
+     boolean exists = faceDatabase.containsProfile(nameEntry);
+  
+     if(exists){ 
+                       // println("Lookup: " + faceDatabase.getProfile(nameEntry));                       
+                       currentProfile = faceDatabase.getProfile(nameEntry);
+                       fpCanvas.displayProfile(currentProfile);
+                       fpCanvas.showMessage("Displaying " + faceDatabase.getProfile(nameEntry).getName());
+                       // println("--> Current profile: " + currentProfile);                       
+                  }
+                  else {
+                       // println("Lookup: profile with name " + nameEntry + " does not exist");                       
+                       currentProfile = null;
+                       fpCanvas.displayProfile(currentProfile);
+                       fpCanvas.showMessage("A profile with the name " + nameEntry + " does not exist");
+                       //println("--> No current profile");
+                  }
+
+   }
+
+
+   private void handleChangeStatus(String statusEntry){
+
+                   if (currentProfile != null){
+                        currentProfile.setStatus(statusEntry);
+                        // println("Status updated to " + currentProfile.getStatus());
+                        fpCanvas.displayProfile(currentProfile);
+                        fpCanvas.showMessage("Status updated to " + currentProfile.getStatus());
+                        // println("--> Current profile: " + currentProfile);
+                   }
+                   else {
+                        // println("--> No current profile"); 
+                        fpCanvas.displayProfile(currentProfile);
+                        fpCanvas.showMessage("Please select a profile to change the status");
+                        // println("Please select a profile to change the status");
+                   }
+}
+
+
+     private GImage loadImage(String filename){
+
+         GImage image = null;
+          
+         try {
+             image = new GImage(filename);
+          } catch (ErrorException ex) {
+             ex.printStackTrace();
+          }
+
+       return image;
+    }
+
+
+    private void handleChangeImage(String pictureEntry){
+
+      if (currentProfile != null){
+            
+          GImage picture = loadImage(pictureEntry);
+
+                    if (picture != null){
+                        currentProfile.setImage(picture);
+                     // println("Profile picture updated");
+                        fpCanvas.displayProfile(currentProfile);
+                        fpCanvas.showMessage("Picture updated");
+                     // println("--> Current profile: " + currentProfile);
+                    }
+
+                    else 
+                     
+                    {
+                        // println("Profile picture is not loaded successfully");
+                        fpCanvas.showMessage("Unable to open image file: " + pictureEntry);
+                    }
+     }
+                
+     else 
+
+     {
+          //println("--> No current profile");
+          fpCanvas.displayProfile(currentProfile);
+          fpCanvas.showMessage("Please select a profile to change the picture");
+          //println("Select a profile to change the picture");
+     }
+   
+   }
+
+
+   private void handleAddFriend(String friendEntry){ 
+
+    if (currentProfile != null){
+
+                      /// Check if friendEntry is an existing profile
+                    if (faceDatabase.containsProfile(friendEntry)){
+  
+                         boolean isAdded = currentProfile.addFriend(friendEntry);
+
+                         fpCanvas.displayProfile(currentProfile);
+                     
+                         if (isAdded) {
+                             //println(friendEntry + " was successfully added in the list of " + currentProfile.getName() + "'s friends."); 
+                             fpCanvas.showMessage(friendEntry + " added as friend");
+                             FacePamphletProfile temp = (FacePamphletProfile) faceDatabase.getProfile(friendEntry);           
+                             temp.addFriend(currentProfile.getName());
+                         }
+                         else {
+                             //println("The given friend name was already in the list of friends");                             
+                             fpCanvas.showMessage(currentProfile.getName() + " already has " + friendEntry + " as friend"); 
+                         }
+                         //println("--> Current profile: " + currentProfile);
+                    } else {
+                       //println("The given friend name is not in the database"); 
+                       fpCanvas.displayProfile(currentProfile);
+                       fpCanvas.showMessage("Please select an existing profile in the database for a friend");
+                    }
+                 }
+
+
+                 else {
+                    //println("--> No current profile");
+                    fpCanvas.displayProfile(currentProfile);
+                    fpCanvas.showMessage("Please select a profile to add friend");
+                    //println("Select a profile for add friend");
+                }    
+      
+      }   
+}

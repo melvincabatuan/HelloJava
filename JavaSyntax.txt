@@ -1,0 +1,49 @@
+Syntax
+
+• int i ⇒ Declares the variable i to be an integer.
+• i = 3 ⇒ Assigns the value 3 to the variable i.
+• double d ⇒ Declares the variable d to be a double.
+• d = 32.22 ⇒ Assigns the value 32.22 to the variable d.
+• char c ⇒ Declares the variable c to be a character.
+• c = ’a’ ⇒ Assigns the value ’a’ to the variable c.
+• long l = 2342412L ⇒ Declares the variable l to be of type long and assigns the value 2342412 to it.
+• float f = 22432.222F ⇒ Declares the variables f to be of type float and assigns the value 22432.222 to it.
+• String s ⇒ Declares the variable s of type String.
+• s = "abc" ⇒ Assigns the value "abc" to the variable s.
+• d = Math.random() ⇒ Assigns a random number between 0(inclusive) and 1(exclusive) to the variable d.
+• s1.compareTo(s2) ⇒ Returns a positive integer if s1 > s2, 0 if s1 = s2, and a negative integer if s1 < s2 (the string order is lexicographical).
+• s1.equals(s2) ⇒ Returns true when the strings are the same and false otherwise.
+• if(a > b) {. . .} ⇒If a > b, then the block is executed.
+• if(a > b) {. . .} else {. . .} ⇒ If a > b, then only the first block is executed. Otherwise,
+only the second block is executed.
+• a==b ⇒ True when a = b.
+• a!=b ⇒ True when a != b.
+• a>=b ⇒ True when a ≥ b.
+• a<=b ⇒ True when a ≤ b.
+• a>b && c>d ⇒ True when a>b and c>d.
+• a>b || c>d ⇒ True when a>b or c>d.
+• !(a==b) ⇒ True when the variables a and b are different.
+• switch(i) { case 4: . . . break; case 5: . . . break; . . . default: . . . } ⇒ If
+i=4, then the statements for the first case are executed. If i=5, then the statements
+for the second case are executed. If i is not equal to any of the case values, then the
+statements for the default case are executed.
+• System.out.println("hello") ⇒ Prints hello followed by a new line.
+• System.out.print("hello\n") ⇒ Prints hello followed by a new line.
+• System.out.print("hello") ⇒ Prints hello.
+• Scanner keyboard = new Scanner(System.in) ⇒ Creates a scanner object.
+• int i = keyboard.nextInt() ⇒ Reads the next integer from the keyboard into the variable i.
+• double d = keyboard.nextDouble() ⇒ Reads the next double from the keyboard into the variable d.
+• String s = keyboard.next() ⇒ Reads the next string from the keyboard into the variable s.
+• String s = keyboard.nextLine() ⇒ Reads the next line from the keyboard into the variable s.
+• x = (a>b) ? y : z ⇒ If a>b, then x becomes equal to y. Otherwise, x becomes equals to z.
+• int i = (int) 32.94 ⇒ Converts the number 32.94 to an integer. The result is
+always rounded down. The integer i will become equal to 32.
+• int i = 2/3 ⇒ The result of integer division is an integer. The result is rounded
+down. Therefore, the variable i will become equal to 0.
+• double f = 2/3.0 ⇒ The variable f will become equal to approximately 2/3. The
+reason is that the result of dividing an integer by a double is a double.
+• return ⇒ Exists a method.
+• int a = Math.max(b,c) ⇒ Finds the max of two numbers.
+• int a = Math.min(b,c) ⇒ Finds the min of two numbers.
+• int a = Math.abs(b) ⇒ Finds the absolute value of a number.
+• double a = Math.sqrt(d) ⇒ Finds the square root of a double.

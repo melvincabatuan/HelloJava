@@ -13,13 +13,12 @@ public class VariablesRange {
      System.out.println("Byte is from " + Byte.MIN_VALUE + " to " + Byte.MAX_VALUE +".");
      System.out.println("The size of a Byte is "+ Byte.SIZE +".\n");
 
-         System.out.println("Short is from " + Short.MIN_VALUE + " to " + Short.MAX_VALUE +".");
+     System.out.println("Short is from " + Short.MIN_VALUE + " to " + Short.MAX_VALUE +".");
      System.out.println("The size of a Short is "+ Short.SIZE +".\n");
 
-        System.out.println("Long is from " + Long.MIN_VALUE + " to " + Long.MAX_VALUE +".");
+     System.out.println("Long is from " + Long.MIN_VALUE + " to " + Long.MAX_VALUE +".");
      System.out.println("The size of a Long is "+ Long.SIZE +".\n");
 
-     System.out.println("The size of a Character is "+ Character.SIZE +".\n");
-     
+     System.out.println("The size of a Character is "+ Character.SIZE +".\n");     
   }
 }
